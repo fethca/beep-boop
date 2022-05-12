@@ -1,0 +1,4 @@
+.env
+*.jpg
+node_modules
+!.gitignore
