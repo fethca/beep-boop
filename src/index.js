@@ -288,7 +288,7 @@ const run = async () => {
     let count = 0
     while(true){
       let status
-      status = count === -0 ? 'scrappe_done' : await scrappe()
+      status = count === -1 ? 'scrappe_done' : await scrappe()
       count++
       if(status === 'scrappe_done'){
         let reject = await getRejectMail()
