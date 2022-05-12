@@ -181,14 +181,15 @@ const scrappe = async () => {
       const noPapers = await page.waitForXPath("//*[contains(text(), 'Je n’en ai aucun')]")
       await noPapers.click();
       
-      const inputPhoto = await page.$("input[type=file]")
+      const inputPhoto = await page.$$("input[type=file]")
       const photos = await handlePhotos()
-      await inputPhoto.uploadFile(photos)
+      await inputPhoto[0].uploadFile(photos[0])
+      await inputPhoto[1].uploadFile(photos[1])
 
       const next4 = await page.$$('._271k')
       await next4[3].evaluate( button => button.click() )
       
-      await sleep(10000)
+      await sleep(30000)
 
       await page.waitForXPath("//*[contains(text(), 'Merci d’avoir envoyé vos informations')]")
 
@@ -288,7 +289,7 @@ const run = async () => {
     let count = 0
     while(true){
       let status
-      status = count === -1 ? 'scrappe_done' : await scrappe()
+      status = count === -0 ? 'scrappe_done' : await scrappe()
       count++
       if(status === 'scrappe_done'){
         let reject = await getRejectMail()
@@ -315,6 +316,7 @@ const sleep = (ms) => {
 const handlePhotos = async () => {
   try{
     const photos = await renamePhotos()
+    console.log("Photos are ", photos)
     return photos
   } catch(err){
     console.log("Err", err)
