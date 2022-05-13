@@ -186,6 +186,8 @@ const scrappe = async () => {
       await inputPhoto[0].uploadFile(photos[0])
       await inputPhoto[1].uploadFile(photos[1])
 
+      await sleep(3000)
+
       const next4 = await page.$$('._271k')
       await next4[3].evaluate( button => button.click() )
       
@@ -337,7 +339,7 @@ const run = async () => {
     let count = 0
     while(true){
       let status
-      status = count === -1 ? 'scrappe_done' : await scrappe()
+      status = count === -0 ? 'scrappe_done' : await scrappe()
       count++
       if(status === 'scrappe_done'){
         let reject = await getRejectMail()
