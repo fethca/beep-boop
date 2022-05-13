@@ -283,26 +283,6 @@ const extractCode = (mail) => {
   return match
 }
 
-const run = async () => {
-  try {
-    console.log(`\nStart app \n`)
-    let count = 0
-    while(true){
-      let status
-      status = count === -0 ? 'scrappe_done' : await scrappe()
-      count++
-      if(status === 'scrappe_done'){
-        let reject = await getRejectMail()
-        console.log(`Get reject success ${reject}\n`)
-      }
-      await sleep(5000)
-      console.log("Done \n")
-    }
-  } catch (error) {
-    console.log("Error = ", error)
-  }
-}
-
 const randomIntFromInterval = (min, max) => { 
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
@@ -349,6 +329,26 @@ const renamePhotos = () => {
       console.log("Error", error)
     }
   })
+}
+
+const run = async () => {
+  try {
+    console.log(`\nStart app \n`)
+    let count = 0
+    while(true){
+      let status
+      status = count === -1 ? 'scrappe_done' : await scrappe()
+      count++
+      if(status === 'scrappe_done'){
+        let reject = await getRejectMail()
+        console.log(`Get reject success ${reject}\n`)
+      }
+      await sleep(5000)
+      console.log("Done \n")
+    }
+  } catch (error) {
+    console.log("Error = ", error)
+  }
 }
 
 run()
